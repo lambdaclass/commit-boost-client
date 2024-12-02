@@ -520,8 +520,8 @@ mod test {
             .join("BLS")
             .join(proxy_signer.pubkey().to_string());
 
-        assert!(json_path.exists());
         assert!(sig_path.exists());
+        assert!(json_path.exists());
         assert!(pass_path.exists());
 
         let keystore: JsonKeystore = serde_json::de::from_str(
