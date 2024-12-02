@@ -507,17 +507,17 @@ mod test {
         let json_path = keys_path
             .join(consensus_signer.pubkey().to_string())
             .join("TEST_MODULE")
-            .join("BLS")
+            .join("bls")
             .join(format!("{}.json", proxy_signer.pubkey().to_string()));
         let sig_path = keys_path
             .join(consensus_signer.pubkey().to_string())
             .join("TEST_MODULE")
-            .join("BLS")
+            .join("bls")
             .join(format!("{}.sig", proxy_signer.pubkey().to_string()));
         let pass_path = secrets_path
             .join(consensus_signer.pubkey().to_string())
             .join("TEST_MODULE")
-            .join("BLS")
+            .join("bls")
             .join(proxy_signer.pubkey().to_string());
 
         let keystore: JsonKeystore =
