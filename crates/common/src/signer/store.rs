@@ -520,21 +520,8 @@ mod test {
             .join("BLS")
             .join(proxy_signer.pubkey().to_string());
 
-        assert!(json_path.is_file());
-        assert!(sig_path.is_file());
-        assert!(pass_path.is_file());
-
-        let keystore: JsonKeystore = serde_json::de::from_str(
-            &std::fs::read_to_string(
-                keys_path
-                    .join(consensus_signer.pubkey().to_string())
-                    .join("TEST_MODULE")
-                    .join("bls")
-                    .join(format!("{}.json", proxy_signer.pubkey().to_string())),
-            )
-            .unwrap(),
-        )
-        .unwrap();
+        let keystore: JsonKeystore =
+            serde_json::de::from_str(&std::fs::read_to_string(json_path).unwrap()).unwrap();
 
         assert_eq!(keystore.pubkey, proxy_signer.pubkey().to_string().trim_start_matches("0x"));
 
@@ -542,7 +529,7 @@ mod test {
         assert!(sig.is_ok());
         assert_eq!(sig.unwrap(), signature);
 
-        std::fs::remove_dir_all(tmp_path).unwrap();
+        assert!(FixedBytes::<32>::from_hex(std::fs::read_to_string(pass_path).unwrap()).is_ok());
     }
 
     #[test]
