@@ -537,6 +537,8 @@ mod test {
         let sig = FixedBytes::from_hex(std::fs::read_to_string(sig_path).unwrap());
         assert!(sig.is_ok());
         assert_eq!(sig.unwrap(), signature);
+
+        std::fs::remove_dir_all(tmp_path).unwrap();
     }
 
     #[test]
@@ -657,5 +659,7 @@ mod test {
         assert!(bls_keys
             .get(&ModuleId("TEST_MODULE".into()))
             .is_some_and(|keys| keys.contains(&proxy_signer.pubkey())));
+
+        std::fs::remove_dir_all(tmp_path).unwrap();
     }
 }
