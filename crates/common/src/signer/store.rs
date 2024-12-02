@@ -472,7 +472,11 @@ mod test {
 
     #[tokio::test]
     async fn test_erc2335_storage_format() {
-        let tmp_path = std::env::temp_dir().join("test_erc2335_storage_format");
+        let tmp_path = match std::env::var("CB_TESTS_DIR") {
+            Ok(dir) => PathBuf::from(dir),
+            Err(_) => std::env::temp_dir(),
+        }
+        .join("test_erc2335_storage_format");
         let keys_path = tmp_path.join("keys");
         let secrets_path = tmp_path.join("secrets");
         let store = ProxyStore::ERC2335 {
@@ -596,7 +600,11 @@ mod test {
 
     #[tokio::test]
     async fn test_erc2335_store_and_load() {
-        let tmp_path = std::env::temp_dir().join("test_erc2335_store_and_load");
+        let tmp_path = match std::env::var("CB_TESTS_DIR") {
+            Ok(dir) => PathBuf::from(dir),
+            Err(_) => std::env::temp_dir(),
+        }
+        .join("test_erc2335_store_and_load");
         let keys_path = tmp_path.join("keys");
         let secrets_path = tmp_path.join("secrets");
         let store = ProxyStore::ERC2335 {

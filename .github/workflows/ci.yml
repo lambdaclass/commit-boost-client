@@ -34,3 +34,5 @@ jobs:
       - name: Install stable toolchain
         uses: dtolnay/rust-toolchain@stable
       - run: cargo test --all-features
+        env:
+          CB_TESTS_DIR: ${{ runner.temp }}
